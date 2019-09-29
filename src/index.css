@@ -30,9 +30,9 @@ code {
   margin: 10px;
 }
 
-.hidden:hover {
+.card.hidden:hover {
   cursor: pointer;
-  background-color: #9cd9ec !important;
+  background-color: #9cd9ec;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
