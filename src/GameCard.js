@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Card, Grid } from "@material-ui/core";
 
 export default function GameCard(props) {
@@ -20,6 +21,16 @@ export default function GameCard(props) {
       </Grid>
     )
   ) : (
-    <Grid item xs={2} className="card removed"></Grid>
+    <Grid item xs={2}>
+      <Card className="card removed"></Card>
+    </Grid>
   );
 }
+
+GameCard.propTypes = {
+  value: PropTypes.string,
+  shown: PropTypes.bool,
+  id: PropTypes.number,
+  exists: PropTypes.bool,
+  showCard: PropTypes.func
+};

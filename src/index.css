@@ -27,6 +27,7 @@ code {
   font-size: 3em;
   text-align: center;
   vertical-align: baseline;
+  margin: 10px;
 }
 
 .hidden:hover {

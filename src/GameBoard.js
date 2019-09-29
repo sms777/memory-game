@@ -88,7 +88,7 @@ export default class GameBoard extends React.Component {
         {won ? (
           <h2>You Win!</h2>
         ) : (
-          <Grid container spacing={4}>
+          <Grid container>
             {cards.map((card, index) => (
               <GameCard
                 key={index}
@@ -105,5 +105,3 @@ export default class GameBoard extends React.Component {
     );
   }
 }
-
-// timer, tests, animations, hooks, functional, error boundary, proptypes
