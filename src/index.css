@@ -12,21 +12,31 @@ code {
     monospace;
 }
 
-.board {
+.board h1 {
+  text-align: center;
 }
 
-.card {
+.board h2 {
+  text-align: center;
+}
+
+.board .card {
   height: 80px;
-  background-color: lightblue;
+  line-height: 80px;
+  background-color: #fbb825;
+  font-size: 3em;
+  text-align: center;
+  vertical-align: baseline;
 }
 
 .hidden:hover {
   cursor: pointer;
-  background-color: #fbb825;
+  background-color: #9cd9ec !important;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.hidden {
-  background-color: tan;
+.board .hidden {
+  background-color: lightblue;
 }
 
 .removed {

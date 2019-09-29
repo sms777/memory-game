@@ -1,8 +1,7 @@
 import React from "react";
-import GameCard from "./Card";
-import Timer from "./Timer";
+import GameCard from "./GameCard";
 import { shuffle } from "lodash";
-import { Grid, Typography, Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 const valueSet = ["Z", "X", "C", "V", "B", "N", "M", "A", "S", "D", "F", "G"];
 const twoOfEachValue = shuffle(valueSet.concat(valueSet));
@@ -18,22 +17,15 @@ export default class GameBoard extends React.Component {
     lastCardId: null,
     curentCardId: null,
     cards: cards,
-    showHideButton: false,
-    counter: 0,
+    wait: false,
     won: false
   };
 
   showCard = (value, id) => {
-    const {
-      cards,
-      counter,
-      lastCardValue,
-      lastCardId,
-      showHideButton
-    } = this.state;
+    const { cards, lastCardValue, lastCardId, wait } = this.state;
 
-    if (!showHideButton) {
-      let showCurrentCard = Array.from(cards);
+    if (!wait) {
+      const showCurrentCard = Array.from(cards);
       showCurrentCard[id].shown = true;
 
       this.setState({
@@ -47,26 +39,28 @@ export default class GameBoard extends React.Component {
           lastCardId: id
         });
       } else if (lastCardValue === value) {
-        let removeCurrentCards = Array.from(cards);
+        const removeCurrentCards = Array.from(cards);
         removeCurrentCards[id].exists = false;
         removeCurrentCards[lastCardId].exists = false;
 
         this.setState({
           lastCardValue: null,
           lastCardId: null,
-          cards: cards,
-          counter: counter + 2
+          cards: cards
         });
+
+        if (!cards.find(card => card.exists)) {
+          this.setState({
+            won: true
+          });
+        }
       } else {
         this.setState({
-          showHideButton: true
+          wait: true
         });
-      }
-
-      if (counter === 24) {
-        this.setState({
-          won: true
-        });
+        setTimeout(() => {
+          this.hideCurrentCards();
+        }, 1000);
       }
     }
   };
@@ -74,7 +68,7 @@ export default class GameBoard extends React.Component {
   hideCurrentCards = () => {
     const { cards, lastCardId, curentCardId } = this.state;
 
-    let hideCurrentCards = Array.from(cards);
+    const hideCurrentCards = Array.from(cards);
     hideCurrentCards[curentCardId].shown = false;
     hideCurrentCards[lastCardId].shown = false;
 
@@ -82,32 +76,32 @@ export default class GameBoard extends React.Component {
       lastCardValue: null,
       lastCardId: null,
       cards: hideCurrentCards,
-      showHideButton: false
+      wait: false
     });
   };
 
   render() {
-    const { cards, won, showHideButton } = this.state;
+    const { cards, won } = this.state;
     return (
-      <>
-        <Timer />
-        <Grid className="board" container spacing={4}>
-          {cards.map((card, index) => (
-            <GameCard
-              key={index}
-              id={index} // key might need to be a uuid
-              value={card.value}
-              shown={card.shown}
-              exists={card.exists}
-              showCard={this.showCard}
-            />
-          ))}
-        </Grid>
-        {showHideButton && (
-          <Button onClick={this.hideCurrentCards}>Hide Cards</Button>
+      <div className="board">
+        <h1>Sam's Memory Game</h1>
+        {won ? (
+          <h2>You Win!</h2>
+        ) : (
+          <Grid container spacing={4}>
+            {cards.map((card, index) => (
+              <GameCard
+                key={index}
+                id={index} // key might need to be a uuid
+                value={card.value}
+                shown={card.shown}
+                exists={card.exists}
+                showCard={this.showCard}
+              />
+            ))}
+          </Grid>
         )}
-        {won && <Typography>You Win!</Typography>}
-      </>
+      </div>
     );
   }
 }
