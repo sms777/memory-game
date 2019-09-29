@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.board {
+}
+
+.card {
+  height: 80px;
+  background-color: lightblue;
+}
+
+.hidden:hover {
+  cursor: pointer;
+  background-color: #fbb825;
+}
+
+.hidden {
+  background-color: tan;
+}
+
+.removed {
+  visibility: hidden;
+}
