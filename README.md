@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In this project I chose to use React and modern JavaScript to create a front end UI based version of the classic memory game. I also chose a mobile first approach to simplify design and make the game more accesible.
+
+The Grid and Card components were supplied from MaterilUi and I added some additionally styling via CSS.
+
+My plan for the project was to have stateless functional Card components that when clicked would trigger game logic. The information about whether or not to show a given card would be passed in via props from the smart parent GameBoard Component.
+
+Basically the GameBoard Component handles all the game logic and when showCard is fired there is a series of checks to determine whether to remove a match, keep the card shown or flip both the shown cards back down.
 
 ## Available Scripts
 
@@ -9,20 +15,6 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Launches the Jest/Enzyme tests in the interactive watch mode.<br>

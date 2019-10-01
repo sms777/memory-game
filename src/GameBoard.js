@@ -1,7 +1,7 @@
 import React from "react";
-import GameCard from "./GameCard";
 import { shuffle } from "lodash";
 import { Grid } from "@material-ui/core";
+import GameCard from "./GameCard";
 
 const valueSet = ["Z", "X", "C", "V", "B", "N", "M", "A", "S", "D", "F", "G"];
 const twoOfEachValue = shuffle(valueSet.concat(valueSet));
@@ -15,7 +15,7 @@ export default class GameBoard extends React.Component {
   state = {
     lastCardValue: null,
     lastCardId: null,
-    curentCardId: null,
+    currentCardId: null,
     cards: cards,
     wait: false,
     won: false
@@ -30,7 +30,7 @@ export default class GameBoard extends React.Component {
 
       this.setState({
         cards: showCurrentCard,
-        curentCardId: id
+        currentCardId: id
       });
 
       if (lastCardValue === null) {
@@ -46,7 +46,7 @@ export default class GameBoard extends React.Component {
         this.setState({
           lastCardValue: null,
           lastCardId: null,
-          cards: cards
+          cards: removeCurrentCards
         });
 
         if (!cards.find(card => card.exists)) {
@@ -59,29 +59,30 @@ export default class GameBoard extends React.Component {
           wait: true
         });
         setTimeout(() => {
-          this.hideCurrentCards();
+          this.hideShownCards();
         }, 1000);
       }
     }
   };
 
-  hideCurrentCards = () => {
-    const { cards, lastCardId, curentCardId } = this.state;
+  hideShownCards = () => {
+    const { cards, lastCardId, currentCardId } = this.state;
 
-    const hideCurrentCards = Array.from(cards);
-    hideCurrentCards[curentCardId].shown = false;
-    hideCurrentCards[lastCardId].shown = false;
+    const hideShownCards = Array.from(cards);
+    hideShownCards[currentCardId].shown = false;
+    hideShownCards[lastCardId].shown = false;
 
     this.setState({
       lastCardValue: null,
       lastCardId: null,
-      cards: hideCurrentCards,
+      cards: hideShownCards,
       wait: false
     });
   };
 
   render() {
     const { cards, won } = this.state;
+
     return (
       <div className="board">
         <h1>Sam's Memory Game</h1>
