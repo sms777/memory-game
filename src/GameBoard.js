@@ -5,7 +5,7 @@ import GameCard from "./GameCard";
 
 const valueSet = ["Z", "X", "C", "V", "B", "N", "M", "A", "S", "D", "F", "G"];
 const twoOfEachValue = shuffle(valueSet.concat(valueSet));
-const cards = twoOfEachValue.map(value => ({
+const initialCards = twoOfEachValue.map(value => ({
   value: value,
   shown: false,
   exists: true
@@ -16,7 +16,7 @@ export default class GameBoard extends React.Component {
     lastCardValue: null,
     lastCardId: null,
     currentCardId: null,
-    cards: cards,
+    cards: initialCards,
     wait: false,
     won: false
   };

@@ -4,7 +4,7 @@ The Grid and Card components were supplied from MaterilUi and I added some addit
 
 My plan for the project was to have stateless functional Card components that when clicked would trigger game logic. The information about whether or not to show a given card would be passed in via props from the smart parent GameBoard Component.
 
-Basically the GameBoard Component handles all the game logic and when showCard is fired there is a series of checks to determine whether to remove a match, keep the card shown or flip both the shown cards back down.
+Basically the GameBoard Component handles all the game logic and when showCard is fired there is a series of checks to determine whether to remove a match, keep the card shown or flip both the shown cards back down. When all of the Cards have a state of removed you win the game.
 
 I have also included some tests to cover some basic use cases.
 
